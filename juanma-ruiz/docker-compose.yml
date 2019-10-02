@@ -30,6 +30,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     networks:
       - defaulNetwork
+    healthcheck:
+      timeout: 10s
+      interval: 10s
+      retries: 5
+      start_perior: 40s
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet 1
 
   mongo-express:
     image: mongo-express
